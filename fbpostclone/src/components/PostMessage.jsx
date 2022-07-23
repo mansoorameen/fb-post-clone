@@ -3,7 +3,6 @@ import { Input, Button, Dialog, Popper, CircularProgress } from "@mui/material";
 import GifBoxIcon from "@mui/icons-material/GifBox";
 
 const PostMessage = (props) => {
-  const [openDialog, setOpenDialog] = useState(false);
   const [gifList, setGifList] = useState([]);
   const [selectedGif, setSelectedGif] = useState("");
   const [message, setMessage] = useState("");
@@ -16,13 +15,12 @@ const PostMessage = (props) => {
 
   // on Post button click
   const postMessageHandler = () => {
-    setOpenDialog(false);
+    props.setOpenDialog(false);
     // creating a new array which has the postData and adds the new data
     // postData is an array of objects which holds the message and gif data
     let newarr = props.postData;
     newarr.push({ message: message, gifUrl: selectedGif });
     props.setPostData(newarr);
-    props.setRefresh(props.refresh + 1);
     setMessage("");
     setSelectedGif("");
     setGifButtonColor("grey");
@@ -72,31 +70,11 @@ const PostMessage = (props) => {
 
   return (
     <>
-      <div
-        style={{
-          margin: "40px",
-        }}
-      >
-        <span
-          onClick={() => {
-            setOpenDialog(true);
-          }}
-          style={{
-            cursor: "pointer",
-            padding: "10px",
-            background: "lightgrey",
-            borderRadius: "50px",
-          }}
-        >
-          What's on your mind ?
-        </span>
-      </div>
-
-      {/* model for post */}
+      {/* model for new post view */}
       <Dialog
-        open={openDialog}
+        open={props.openDialog}
         onClose={() => {
-          setOpenDialog(false);
+          props.setOpenDialog(false);
           setAnchorEl(null);
           openGifPop = Boolean(anchorEl);
         }}
@@ -207,6 +185,7 @@ const PostMessage = (props) => {
           ) : gifList.length ? (
             gifList.map((eachGif) => (
               <img
+                key={eachGif.id}
                 src={eachGif.images.downsized.url}
                 style={{ height: "230px", width: "300px" }}
                 onClick={(e) => {

@@ -1,19 +1,21 @@
 import "./App.css";
+import Main from "./components/Main";
 import PostMessage from "./components/PostMessage";
 import MessageList from "./components/MessageList";
 import { useState } from "react";
 
 function App() {
   const [postData, setPostData] = useState([]);
-  const [refresh, setRefresh] = useState(1);
+  const [openDialog, setOpenDialog] = useState(false);
 
   return (
     <div className="App">
+      <Main setOpenDialog={setOpenDialog} />
       <PostMessage
         setPostData={setPostData}
         postData={postData}
-        refresh={refresh}
-        setRefresh={setRefresh}
+        setOpenDialog={setOpenDialog}
+        openDialog={openDialog}
       />
       <MessageList postData={postData} />
     </div>

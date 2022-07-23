@@ -4,8 +4,8 @@ const MessageList = (props) => {
   return (
     <>
       {props.postData.length ? (
-        props.postData.map((eachPost) => (
-          <>
+        props.postData.map((eachPost, index) => (
+          <div key={index}>
             <hr style={{ width: "30%" }} />
             <div
               style={{
@@ -28,7 +28,7 @@ const MessageList = (props) => {
                 />
               )}
             </div>
-          </>
+          </div>
         ))
       ) : (
         <span>Your posts will be displayed here</span>
