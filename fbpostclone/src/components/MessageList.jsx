@@ -14,13 +14,16 @@ const MessageList = (props) => {
                 alignItems: "center",
               }}
             >
-              <span style={{ margin: "10px" }}>{eachPost.message}</span>
+              {eachPost.message && (
+                <span style={{ margin: "10px" }}>{eachPost.message}</span>
+              )}
               {eachPost.gifUrl && (
                 <img
                   src={eachPost.gifUrl}
                   style={{
                     height: "300px",
                     width: "300px",
+                    margin: "10px",
                   }}
                 />
               )}
